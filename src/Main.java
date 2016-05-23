@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class Main {
 
@@ -6,17 +7,29 @@ public class Main {
 
         while(true) {
 
-            System.out.println("Selecione alguma das rotas e meio de transporte\n");
-
-            for(int i = 0; i < maquinas.size(); i++) {
-                System.out.println("[" +  i + "] " + "\t" + maquinas.get(i));
-            }
-
-            System.out.println("OU DIGITE -1 PARA SAIR\n");
-
-            System.out.print("Digite o numero da maquina: ");
+            Integer resposta = -2;
             Scanner leitor = new Scanner(System.in);
-            Integer resposta = leitor.nextInt();
+
+            while(resposta < -1 || resposta > maquinas.size() - 1) {
+
+                System.out.println("Selecione alguma das rotas e meio de transporte\n");
+
+                for(int i = 0; i < maquinas.size(); i++) {
+                    System.out.println("[" +  i + "] " + "\t" + maquinas.get(i));
+                }
+
+                System.out.println("OU DIGITE -1 PARA SAIR\n");
+
+                System.out.print("Digite o numero da maquina: ");
+
+                try {
+                    resposta = Integer.parseInt(leitor.next());
+                } catch (Exception e) {
+                    resposta = -2; // faz a resposta ser menor que -1 e entrar novamente no loop
+                }
+
+
+            }
 
             if(resposta == -1) break;
 
@@ -29,21 +42,42 @@ public class Main {
 
                 IMaquina maquinaAcessada = maquinas.get(resposta);
 
-                System.out.println("Maquina selecionada: ");
-                maquinaAcessada.mostrarRota();
+                String[] horario;
 
-                maquinaAcessada.gerarMsgEscolherHorario(maquinaAcessada);
+                while (true) {
 
-                String[] horario = leitor.next().split(":");
+                    System.out.print("\nMaquina selecionada: ");
+                    maquinaAcessada.mostrarRota();
+                    System.out.println("");
+                    maquinaAcessada.gerarMsgEscolherHorario(maquinaAcessada);
+                    horario = leitor.next().split(":");
 
-                if (horario.length != 2) {
-                    throw new IllegalArgumentException("O horario deve ser na seguinte forma: <hora>:<minutos>\n" +
-                            "Por favor, reinicie o processo!");
+                    if (horario.length != 2) {
+                        System.out.println("\n\nO horario deve ser na seguinte forma: <hora>:<minutos>\n" +
+                                "Por favor, reinicie o processo!\n");
+                    }
+                    else { // se o horario esta no formato correto, vai para a proxima etapa
+                        break;
+                    }
                 }
 
-                maquinaAcessada.gerarMsgEscolherOrigem();
+                String[] origensPossiveisAux = maquinaAcessada.mostrarRota().split("-");
+                List<String> origensPossiveis = new ArrayList<>(origensPossiveisAux.length);
 
-                String origem = leitor.next();
+                // limpa os espacos das origens
+                for(String s : origensPossiveisAux) {
+                    origensPossiveis.add(s.trim());
+                }
+
+                String origem = "";
+
+                // enquanto a origem for invalida
+                while(!origensPossiveis.contains(origem)) {
+
+                    maquinaAcessada.gerarMsgEscolherOrigem();
+
+                    origem = leitor.next();
+                }
 
                 Tempo t = new Tempo(Integer.parseInt(horario[0]), Integer.parseInt(horario[1]));
 
@@ -264,7 +298,13 @@ public class Main {
 
     private static void adicionarNovoHorario(List<Horario> horarios, Tempo tempo) {
 
-        Data data = new Data(15,05,2016);
+        Calendar calobj = Calendar.getInstance();
+
+        Integer mes = calobj.get(Calendar.MONTH) + 1,
+                dia = calobj.get(Calendar.DAY_OF_MONTH),
+                ano = calobj.get(Calendar.YEAR);
+
+        Data data = new Data(dia,mes,ano);
         Horario horario = new Horario(tempo, data, true);
         horarios.add(horario);
     }

@@ -24,6 +24,7 @@ public class Data {
     }
 
     public Integer getDia() {
+
         return dia;
     }
 
@@ -35,6 +36,18 @@ public class Data {
     public Integer getAno() {
 
         return ano;
+    }
+
+    public void setDia(Integer dia) {
+        this.dia = dia;
+    }
+
+    public void setMes(Integer mes) {
+        this.mes = mes;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
     }
 
     @Override

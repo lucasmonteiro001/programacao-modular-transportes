@@ -128,11 +128,13 @@ public abstract  class  AMaquina implements IMaquina {
     }
 
     @Override
-    public void mostrarRota() {
+    public String mostrarRota() {
 
         String[] destinos = this.bilhetes.keySet().toString().split(",");
 
         System.out.println(destinos[0].substring(1) + " - " + destinos[1].substring(0,destinos[1].length() - 1));
+
+        return destinos[0].substring(1) + " - " + destinos[1].substring(0,destinos[1].length() - 1);
     }
 
     @Override

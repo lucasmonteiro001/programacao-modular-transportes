@@ -29,6 +29,14 @@ public class Tempo {
         return minutos;
     }
 
+    public void setHora(Integer hora) {
+        this.hora = hora;
+    }
+
+    public void setMinutos(Integer minutos) {
+        this.minutos = minutos;
+    }
+
     @Override
     public String toString() {
 

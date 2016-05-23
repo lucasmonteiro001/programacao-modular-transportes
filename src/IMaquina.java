@@ -75,7 +75,7 @@ public interface IMaquina {
     /**
      * Mostra qual a rota que a maquina esta vendendo. Ex: BHZ - RJ
      */
-    public void mostrarRota();
+    public String mostrarRota();
 
     /**
      * Dado que um bilhete foi vendido, retira-o da lista de bilhetes disponiveis da maquina
