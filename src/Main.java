@@ -244,148 +244,42 @@ public class Main {
     public static void main(String[] args) {
 
         List<IMaquina> maquinas = new ArrayList<>();
-        IMaquina maq_1, maq_2, maq_3, maq_4, maq5;
+        IMaquina maq_1, maq_2, maq_3, maq_4, maq_5;
 
 
         Map<String, List<Horario>> lista = new HashMap<>();
-        lista.put("BRA", criarHorariosBRAMaq1());
-        lista.put("BHZ", criarHorariosBHZMaq1());
-        maq_1 = new MaquinaAviao(1, lista, 250.0, 170.0, 100.0, 15, 35, 80, "TAM");
+        lista.put("BRA", CriadorHorariosPreDefinidos.criarHorariosBRAMaq1());
+        lista.put("BHZ", CriadorHorariosPreDefinidos.criarHorariosBHZMaq1());
+        maq_1 = new MaquinaAviao(1, lista, 250.0, 170.0, 100.0, 15, 35, 80, "TAM Transportes Aereos");
 
         lista = new HashMap<>();
-        lista.put("BHZ", criarHorariosBHZMaq2());
-        lista.put("SPA", criarHorariosSPAMaq2());
-        maq_2 = new MaquinaOnibus(1, lista, 100.0, 50, "Gontijo");
+        lista.put("BHZ", CriadorHorariosPreDefinidos.criarHorariosBHZMaq2());
+        lista.put("SPA", CriadorHorariosPreDefinidos.criarHorariosSPAMaq2());
+        maq_2 = new MaquinaOnibus(2, lista, 100.0, 70, "Viacao Gontijo");
 
         lista = new HashMap<>();
-        lista.put("SPA", criarHorariosSPAMaq3());
-        lista.put("RJ", criarHorariosRJMaq3());
-        maq_3 = new MaquinaOnibus(1, lista, 100.0, 50, "Sertaneja");
+        lista.put("SPA", CriadorHorariosPreDefinidos.criarHorariosSPAMaq3());
+        lista.put("RJ", CriadorHorariosPreDefinidos.criarHorariosRJMaq3());
+        maq_3 = new MaquinaOnibus(3, lista, 112.0, 70, "Viacao Sertaneja");
+
+        lista = new HashMap<>();
+        lista.put("BA", CriadorHorariosPreDefinidos.criarHorariosRand1());
+        lista.put("AM", CriadorHorariosPreDefinidos.criarHorariosRand3());
+        maq_4 = new MaquinaTrem(4, lista, 190.0, 120, "Trem-BaAm");
+
+        lista = new HashMap<>();
+        lista.put("AC", CriadorHorariosPreDefinidos.criarHorariosRand2());
+        lista.put("RS", CriadorHorariosPreDefinidos.criarHorariosRand4());
+        maq_5 = new MaquinaTrem(5, lista, 1200.0, 70, "Trem-AcRs");
 
         maquinas.add(maq_1);
         maquinas.add(maq_2);
         maquinas.add(maq_3);
+        maquinas.add(maq_4);
+        maquinas.add(maq_5);
 
         menu(maquinas);
     }
 
-    private static List<Horario> criarHorariosRJMaq3() {
 
-        List<Horario> horarios = new LinkedList<>();
-
-        adicionarNovoHorario(horarios, new Tempo(5, 30));
-        adicionarNovoHorario(horarios, new Tempo(6, 0));
-        adicionarNovoHorario(horarios, new Tempo(7, 0));
-        adicionarNovoHorario(horarios, new Tempo(8, 30));
-        adicionarNovoHorario(horarios, new Tempo(12, 15));
-        adicionarNovoHorario(horarios, new Tempo(14, 0));
-        adicionarNovoHorario(horarios, new Tempo(17, 0));
-        adicionarNovoHorario(horarios, new Tempo(18, 0));
-        adicionarNovoHorario(horarios, new Tempo(19, 30));
-        adicionarNovoHorario(horarios, new Tempo(22, 00));
-
-        return horarios;
-    }
-
-    private static List<Horario> criarHorariosSPAMaq3() {
-
-        List<Horario> horarios = new LinkedList<>();
-
-        adicionarNovoHorario(horarios, new Tempo(6, 0));
-        adicionarNovoHorario(horarios, new Tempo(7, 0));
-        adicionarNovoHorario(horarios, new Tempo(8, 0));
-        adicionarNovoHorario(horarios, new Tempo(9, 0));
-        adicionarNovoHorario(horarios, new Tempo(10, 0));
-        adicionarNovoHorario(horarios, new Tempo(12, 0));
-        adicionarNovoHorario(horarios, new Tempo(13, 30));
-        adicionarNovoHorario(horarios, new Tempo(14, 30));
-        adicionarNovoHorario(horarios, new Tempo(15, 30));
-        adicionarNovoHorario(horarios, new Tempo(16, 30));
-        adicionarNovoHorario(horarios, new Tempo(18, 0));
-        adicionarNovoHorario(horarios, new Tempo(19, 0));
-        adicionarNovoHorario(horarios, new Tempo(21, 30));
-        adicionarNovoHorario(horarios, new Tempo(22, 0));
-        adicionarNovoHorario(horarios, new Tempo(22, 30));
-        adicionarNovoHorario(horarios, new Tempo(23, 0));
-        adicionarNovoHorario(horarios, new Tempo(23, 30));
-        adicionarNovoHorario(horarios, new Tempo(23, 59));
-
-
-        return horarios;
-    }
-
-    private static List<Horario> criarHorariosSPAMaq2() {
-
-        List<Horario> horarios = new LinkedList<>();
-
-        adicionarNovoHorario(horarios, new Tempo(5, 30));
-        adicionarNovoHorario(horarios, new Tempo(6, 0));
-        adicionarNovoHorario(horarios, new Tempo(7, 0));
-        adicionarNovoHorario(horarios, new Tempo(8, 30));
-        adicionarNovoHorario(horarios, new Tempo(12, 15));
-        adicionarNovoHorario(horarios, new Tempo(14, 0));
-        adicionarNovoHorario(horarios, new Tempo(17, 0));
-        adicionarNovoHorario(horarios, new Tempo(18, 0));
-        adicionarNovoHorario(horarios, new Tempo(19, 30));
-        adicionarNovoHorario(horarios, new Tempo(22, 0));
-
-        return horarios;
-    }
-
-    private static List<Horario> criarHorariosBHZMaq2() {
-
-        List<Horario> horarios = new LinkedList<>();
-
-        adicionarNovoHorario(horarios, new Tempo(6, 0));
-        adicionarNovoHorario(horarios, new Tempo(7, 0));
-        adicionarNovoHorario(horarios, new Tempo(10, 0));
-        adicionarNovoHorario(horarios, new Tempo(15, 0));
-        adicionarNovoHorario(horarios, new Tempo(17, 30));
-        adicionarNovoHorario(horarios, new Tempo(21, 0));
-        adicionarNovoHorario(horarios, new Tempo(22, 30));
-        adicionarNovoHorario(horarios, new Tempo(23, 59));
-
-        return horarios;
-
-    }
-
-    private static List<Horario> criarHorariosBRAMaq1() {
-
-        List<Horario> horarios = new LinkedList<>();
-
-        adicionarNovoHorario(horarios, new Tempo(7, 30));
-        adicionarNovoHorario(horarios, new Tempo(10, 45));
-        adicionarNovoHorario(horarios, new Tempo(13, 0));
-        adicionarNovoHorario(horarios, new Tempo(14, 45));
-        adicionarNovoHorario(horarios, new Tempo(21, 15));
-        adicionarNovoHorario(horarios, new Tempo(22, 0));
-
-        return horarios;
-    }
-
-    public static List<Horario> criarHorariosBHZMaq1() {
-
-        List<Horario> horarios = new LinkedList<>();
-
-        adicionarNovoHorario(horarios, new Tempo(7, 45));
-        adicionarNovoHorario(horarios, new Tempo(10, 0));
-        adicionarNovoHorario(horarios, new Tempo(15, 0));
-        adicionarNovoHorario(horarios, new Tempo(17, 45));
-        adicionarNovoHorario(horarios, new Tempo(21, 0));
-
-        return horarios;
-    }
-
-    private static void adicionarNovoHorario(List<Horario> horarios, Tempo tempo) {
-
-        Calendar calobj = Calendar.getInstance();
-
-        Integer mes = calobj.get(Calendar.MONTH) + 1,
-                dia = calobj.get(Calendar.DAY_OF_MONTH),
-                ano = calobj.get(Calendar.YEAR);
-
-        Data data = new Data(dia,mes,ano);
-        Horario horario = new Horario(tempo, data, true);
-        horarios.add(horario);
-    }
 }
