@@ -46,7 +46,7 @@ public class Main {
                 String[] horario;
 
                 System.out.print("\nMaquina selecionada: ");
-                maquinaAcessada.mostrarRota();
+                System.out.println(maquinaAcessada.mostrarRota());
 
                 while (true) {
 
@@ -103,11 +103,11 @@ public class Main {
                     // Obtem a classe do voo
                     while(true) {
 
-                        System.out.println("Qual classe gostaria de viajar? Responda, ou A, ou B, ou C:");
+                        System.out.println("\nQual classe gostaria de viajar? Responda, ou A, ou B, ou C:");
                         classeVoo = leitor.next();
-                        classeVoo = classeVoo.toLowerCase();
+                        classeVoo = classeVoo.toUpperCase();
 
-                        if((classeVoo.equals("a") || classeVoo.equals("b") || classeVoo.equals("c")))
+                        if((classeVoo.equals("A") || classeVoo.equals("B") || classeVoo.equals("C")))
                             break;
 
                     }
@@ -154,7 +154,7 @@ public class Main {
                         rotinaCompraRealizadaComTroco(maquinaAcessada, origem, bilheteComprado, quantia);
 
                     }
-                    else if(quantia == bilheteComprado.valorBilhete) {
+                    else if(quantia.toString().equals(bilheteComprado.valorBilhete.toString())) {
 
                         rotinaCompraRealizadaSemTroco(maquinaAcessada, origem, bilheteComprado);
                     }
@@ -192,12 +192,12 @@ public class Main {
                     }
 
                 } else { // Se nao ha o bilhete disponivel (quer dizer que todos foram vendindo para aquele horario)
-                    System.out.println("\nBilhetes esgotados para esse horario! Favor reiniciar o processo\n");
+                    System.out.println("\n---------------------------------------------------------------\n" +
+                            "Bilhetes esgotados para esse horario! Favor reiniciar o processo" +
+                            "\n---------------------------------------------------------------\n");
                 }
 
             }
-
-            System.out.println("--------------");
         }
     }
 
@@ -210,7 +210,12 @@ public class Main {
     private static void rotinaCompraRealizadaSemTroco(IMaquina maquinaAcessada, String origem, ABilhete bilheteComprado) {
         maquinaAcessada.registrarVenda(bilheteComprado.valorBilhete);
         maquinaAcessada.gerarMsgCompraRealizada();
+
+
+        System.out.println("############################################");
         System.out.println(bilheteComprado);
+        System.out.println("############################################\n\n");
+
         maquinaAcessada.retirarBilheteVendido(origem, bilheteComprado);
     }
 
@@ -228,7 +233,11 @@ public class Main {
         maquinaAcessada.registrarVenda(bilheteComprado.valorBilhete);
         maquinaAcessada.gerarMsgCompraRealizada();
         maquinaAcessada.gerarMsgTroco(troco);
+
+        System.out.println("############################################");
         System.out.println(bilheteComprado);
+        System.out.println("############################################\n\n");
+
         maquinaAcessada.retirarBilheteVendido(origem, bilheteComprado);
     }
 

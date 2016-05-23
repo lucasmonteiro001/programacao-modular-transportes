@@ -59,7 +59,7 @@ public class MaquinaOnibus extends  AMaquina{
                     BilheteOnibus b = new BilheteOnibus(numeroDeSerie, serieBilhete++, destino, horarioAgora, h, "Praca da " +
                             "Estacao",
                             companhia,
-                            valorBilhete, vagasPorHorario, "A");
+                            valorBilhete, vagasPorHorario, "Poltrona Padrao");
 
 
                     this.bilhetes.get(destino).add(b);

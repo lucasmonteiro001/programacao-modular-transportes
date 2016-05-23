@@ -59,22 +59,22 @@ public abstract  class  AMaquina implements IMaquina {
 
     @Override
     public void gerarMsgValorInsuficiente(Double quantia, Double valorBilhete) {
-        System.out.println("O valor já inserido R$ (" + String.format("%.2f", quantia)  +") é insufiente. Por favor, " +
-                "coloque mais " +
-                "dinheiro para completar o valor total do bilhete, que é : R$ (" + String.format("%.2f", valorBilhete)
+
+        System.out.println("O valor já inserido R$ (" + String.format("%.2f", quantia)  +") é insufiente para o preco" +
+                " de R$ (" + String.format("%.2f", valorBilhete)
                 + ")");
     }
 
     @Override
     public void gerarMsgCompraRealizada() {
 
-        System.out.println("\n\nSua compra foi realizada com sucesso!");
+        System.out.println("\n\nSua compra foi realizada com sucesso!\n");
     }
 
     @Override
     public void gerarMsgTroco(Double troco) {
 
-        System.out.println("Seu troco eh de: R$ " + String.format("%.2f", troco));
+        System.out.println("Seu troco eh de: R$ " + String.format("%.2f", troco) + "\n");
 
     }
 
@@ -87,14 +87,14 @@ public abstract  class  AMaquina implements IMaquina {
     @Override
     public void gerarMsgEscolherHorario(IMaquina maquinaAcessada) {
 
-        System.out.println("Por favor, selecione um dos seguintes horarios: ");
+        System.out.println("Por favor, selecione um dos seguintes horarios: \n");
         System.out.print(maquinaAcessada.getHorariosDePartida());
-        System.out.print("Digite o horario, como mostrado acima: ");
+        System.out.print("\nDigite o horario, como mostrado acima: ");
     }
 
     @Override
     public void gerarMsgValorBilhete(Double valorBilhete) {
-        System.out.println("O valor do bilhete eh: R$ " + String.format("%.2f", valorBilhete));
+        System.out.println("\nO valor do bilhete eh: R$ " + String.format("%.2f", valorBilhete) + "\n");
     }
 
     @Override
@@ -135,7 +135,7 @@ public abstract  class  AMaquina implements IMaquina {
 
         String[] destinos = this.bilhetes.keySet().toString().split(",");
 
-        System.out.println(destinos[0].substring(1) + " - " + destinos[1].substring(0,destinos[1].length() - 1));
+        //System.out.println(destinos[0].substring(1) + " - " + destinos[1].substring(0,destinos[1].length() - 1));
 
         return destinos[0].substring(1) + " - " + destinos[1].substring(0,destinos[1].length() - 1);
     }

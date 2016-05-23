@@ -10,7 +10,7 @@ public class BilheteTrem extends ABilhete {
                        Horario emissao, Horario embarque, String localEmbarque, String companhia, Double
                                valorBilhete, Integer numeroTrem, String tipoPoltrona) {
 
-        super(numeroSerieMaquina, numeroSerieBilhete, "trem", destino, emissao, embarque, localEmbarque,
+        super(numeroSerieMaquina, numeroSerieBilhete, "Trem", destino, emissao, embarque, localEmbarque,
                 companhia, valorBilhete);
 
 

@@ -10,7 +10,7 @@ public class BilheteOnibus extends ABilhete {
                          Horario emissao, Horario embarque, String localEmbarque, String companhia, Double
                                valorBilhete, Integer numeroOnibus, String tipoPoltrona) {
 
-        super(numeroSerieMaquina, numeroSerieBilhete, "onibus", destino, emissao, embarque, localEmbarque,
+        super(numeroSerieMaquina, numeroSerieBilhete, "Onibus", destino, emissao, embarque, localEmbarque,
                 companhia, valorBilhete);
 
 

@@ -58,7 +58,7 @@ public class MaquinaTrem extends  AMaquina{
 
                     BilheteTrem b = new BilheteTrem(numeroDeSerie, serieBilhete++, destino, horarioAgora, h, "Nova Contagem",
                             companhia,
-                            valorBilhete, vagasPorHorario, "A");
+                            valorBilhete, vagasPorHorario, "Poltrona Padrao");
 
 
                     this.bilhetes.get(destino).add(b);

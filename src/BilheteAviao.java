@@ -13,7 +13,7 @@ public class BilheteAviao extends ABilhete {
                                valorBilhete, Integer numeroVoo, String
                                 classeVoo, Integer numPoltrona, Tempo horarioLimiteCheckin) {
 
-        super(numeroSerieMaquina, numeroSerieBilhete, "aviao", destino, emissao, embarque, localEmbarque,
+        super(numeroSerieMaquina, numeroSerieBilhete, "Aviao", destino, emissao, embarque, localEmbarque,
                 companhia, valorBilhete);
 
 
