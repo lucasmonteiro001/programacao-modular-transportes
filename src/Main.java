@@ -9,6 +9,7 @@ public class Main {
 
             Integer resposta = -2;
             Scanner leitor = new Scanner(System.in);
+            String classeVoo = "";
 
             while(resposta < -1 || resposta > maquinas.size() - 1) {
 
@@ -94,7 +95,30 @@ public class Main {
 
                 Tempo t = new Tempo(Integer.parseInt(horario[0]), Integer.parseInt(horario[1]));
 
-                Boolean existeBilheteDisponivel = maquinaAcessada.verificarBilheteDisponivel(origem, t);
+                Boolean existeBilheteDisponivel = false;
+
+                // se a maquina eh do tipo de maquina de aviao
+                if(maquinaAcessada instanceof MaquinaAviao) {
+
+                    // Obtem a classe do voo
+                    while(true) {
+
+                        System.out.println("Qual classe gostaria de viajar? Responda, ou a, ou b, ou c:");
+                        classeVoo = leitor.next();
+
+                        if((classeVoo.equals("a") || classeVoo.equals("b") || classeVoo.equals("c")))
+                            break;
+
+                    }
+
+                    existeBilheteDisponivel = ((MaquinaAviao)(maquinaAcessada)).verificarBilheteDisponivel(origem, t,
+                            classeVoo);
+                }
+
+                else {
+
+                    existeBilheteDisponivel = maquinaAcessada.verificarBilheteDisponivel(origem, t);
+                }
 
                 if(existeBilheteDisponivel) {
 
@@ -212,7 +236,7 @@ public class Main {
         Map<String, List<Horario>> lista = new HashMap<>();
         lista.put("BRA", criarHorariosBRAMaq1());
         lista.put("BHZ", criarHorariosBHZMaq1());
-        maq_1 = new MaquinaAviao(1, lista, 250.0, 50, "TAM");
+        maq_1 = new MaquinaAviao(1, lista, 250.0, 15, 35, 80, "TAM");
 
         lista = new HashMap<>();
         lista.put("BHZ", criarHorariosBHZMaq2());

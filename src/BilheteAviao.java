@@ -24,6 +24,10 @@ public class BilheteAviao extends ABilhete {
 
     }
 
+    public String getClasseVoo() {
+        return classeVoo;
+    }
+
     @Override
     public String toString() {
         return super.toString() +

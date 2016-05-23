@@ -9,8 +9,8 @@ public class MaquinaAviao extends AMaquina {
 
     private static Integer serieBilhete = 1;
 
-    public MaquinaAviao(Integer numeroDeSerie, Map<String, List<Horario>> destinoHorario, Double valorBilhete, Integer
-            vagasPorHorario, String companhia) {
+    public MaquinaAviao(Integer numeroDeSerie, Map<String, List<Horario>> destinoHorario, Double valorBilhete,
+                        Integer vagasClasseA, Integer vagasClasseB, Integer vagasClasseC, String companhia) {
 
         this.saldo = 0.0;
         this.numeroDeSerie = numeroDeSerie;
@@ -54,13 +54,39 @@ public class MaquinaAviao extends AMaquina {
 
 
                 // cria o numero de vagasPorHorario para cada horario
-                for(int i = 0; i < vagasPorHorario; i++) {
+                for(int i = 0; i < vagasClasseA; i++) {
 
-                    Integer numPoltrona = serieBilhete % vagasPorHorario;
+                    Integer numPoltrona = serieBilhete % vagasClasseA;
                     Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
 
                     BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
-                            "Aeroporto", companhia, valorBilhete, h.hashCode(), "C", numPoltrona, tempo);
+                            "Aeroporto", companhia, valorBilhete, h.hashCode(), "a", numPoltrona, tempo);
+
+
+                    this.bilhetes.get(destino).add(b);
+                }
+
+                // cria o numero de vagasPorHorario para cada horario
+                for(int i = 0; i < vagasClasseB; i++) {
+
+                    Integer numPoltrona = serieBilhete % (vagasClasseA + vagasClasseB);
+                    Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
+
+                    BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
+                            "Aeroporto", companhia, valorBilhete, h.hashCode(), "b", numPoltrona, tempo);
+
+
+                    this.bilhetes.get(destino).add(b);
+                }
+
+                // cria o numero de vagasPorHorario para cada horario
+                for(int i = 0; i < vagasClasseC; i++) {
+
+                    Integer numPoltrona = serieBilhete % (vagasClasseA + vagasClasseB + vagasClasseC);
+                    Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
+
+                    BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
+                            "Aeroporto", companhia, valorBilhete, h.hashCode(), "c", numPoltrona, tempo);
 
 
                     this.bilhetes.get(destino).add(b);
@@ -70,6 +96,35 @@ public class MaquinaAviao extends AMaquina {
 
         }
 
+    }
+
+    public Boolean verificarBilheteDisponivel(String origem, Tempo tempo, String classeBilhete) {
+
+        // verifica se ha algum bilhete com essa origem
+        if(bilhetes.get(origem).size() != 0) {
+
+            List<ABilhete> bilhetesDisponiveis = bilhetes.get(origem);
+
+            for(ABilhete bilhete : bilhetesDisponiveis) {
+
+                if(bilhete instanceof BilheteAviao) {
+
+                    BilheteAviao bilheteAviao = (BilheteAviao) bilhete;
+
+                    // verifica se ha algum bilhete disponivel
+                    if(bilheteAviao.getClasseVoo().equals(classeBilhete)
+                            && (bilhete.embarque.getTempo().toString().equals(tempo.toString()))) {
+                        return true;
+                    }
+                }
+                // verifica se ha algum bilhete disponivel
+                else if(bilhete.embarque.getTempo().toString().equals(tempo.toString())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override
