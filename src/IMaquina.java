@@ -27,8 +27,10 @@ public interface IMaquina {
 
     /**
      * Gera uma mensagem de valor insuficiente
+     * @param quantia
+     * @param valorBilhete
      */
-    public void gerarMsgValorInsuficiente();
+    public void gerarMsgValorInsuficiente(Double quantia, Double valorBilhete);
 
     /**
      * Gera uma mensagem informando o troco do cliente

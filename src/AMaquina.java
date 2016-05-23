@@ -58,9 +58,11 @@ public abstract  class  AMaquina implements IMaquina {
 
 
     @Override
-    public void gerarMsgValorInsuficiente() {
-        System.out.println("Valor insufiente. Por favor, coloque mais dinheiro!!! ");
-        System.out.print("Digite uma quantia para ser acrescentada: ");
+    public void gerarMsgValorInsuficiente(Double quantia, Double valorBilhete) {
+        System.out.println("O valor já inserido R$ (" + String.format("%.2f", quantia)  +") é insufiente. Por favor, " +
+                "coloque mais " +
+                "dinheiro para completar o valor total do bilhete, que é : R$ (" + String.format("%.2f", valorBilhete)
+                + ")");
     }
 
     @Override
@@ -78,7 +80,7 @@ public abstract  class  AMaquina implements IMaquina {
     @Override
     public void gerarMsgEscolherOrigem() {
 
-        System.out.print("Digite a origem, escreva como ela foi mostrada acima: ");
+        System.out.print("Digite a origem, como mostrada acima: ");
     }
 
     @Override
@@ -91,7 +93,7 @@ public abstract  class  AMaquina implements IMaquina {
 
     @Override
     public void gerarMsgValorBilhete(ABilhete bilhete) {
-        System.out.println("O valor do bilhete eh: R$ " + bilhete.valorBilhete);
+        System.out.println("O valor do bilhete eh: R$ " + String.format("%.2f", bilhete.valorBilhete));
     }
 
     @Override

@@ -44,21 +44,34 @@ public class Main {
 
                 String[] horario;
 
+                System.out.print("\nMaquina selecionada: ");
+                maquinaAcessada.mostrarRota();
+
                 while (true) {
 
-                    System.out.print("\nMaquina selecionada: ");
-                    maquinaAcessada.mostrarRota();
                     System.out.println("");
                     maquinaAcessada.gerarMsgEscolherHorario(maquinaAcessada);
                     horario = leitor.next().split(":");
 
-                    if (horario.length != 2) {
-                        System.out.println("\n\nO horario deve ser na seguinte forma: <hora>:<minutos>\n" +
-                                "Por favor, reinicie o processo!\n");
+                    Integer hora, minutos;
+
+                    try {
+
+                        hora = Integer.parseInt(horario[0]);
+                        minutos = Integer.parseInt(horario[1]);
+
+                        // verifica se o horario esta na forma correta
+                        if (horario.length != 2) {
+                            System.out.println("\nO horario deve ser na seguinte forma: <hora>:<minutos>");
+                        }
+                        else { // se o horario esta no formato correto, vai para a proxima etapa
+                            break;
+                        }
+
+                    } catch (Exception e) {
+                        // propositalmente vazio
                     }
-                    else { // se o horario esta no formato correto, vai para a proxima etapa
-                        break;
-                    }
+
                 }
 
                 String[] origensPossiveisAux = maquinaAcessada.mostrarRota().split("-");
@@ -89,8 +102,23 @@ public class Main {
 
                     maquinaAcessada.gerarMsgValorBilhete(bilheteComprado);
 
-                    System.out.print("Por favor insira uma quantia:");
-                    Double quantia = leitor.nextDouble();
+
+                    Double quantia = 0.0;
+
+                    while(true) {
+
+                        System.out.print("Por favor insira uma quantia:");
+
+                        try {
+                            quantia = Double.parseDouble(leitor.next());
+                            break;
+                        }
+                        catch (Exception e) {
+                            // propositalmente vazio
+                            System.out.println("Quantia invalida!");
+                        }
+
+                    }
 
                     if(quantia > bilheteComprado.valorBilhete) {
 
@@ -105,8 +133,22 @@ public class Main {
 
                         while(quantia < bilheteComprado.valorBilhete) {
 
-                            maquinaAcessada.gerarMsgValorInsuficiente();
-                            quantia += leitor.nextDouble();
+                            maquinaAcessada.gerarMsgValorInsuficiente(quantia, bilheteComprado.valorBilhete);
+
+                            while(true) {
+
+                                System.out.print("Por favor insira uma quantia:");
+
+                                try {
+                                    quantia += Double.parseDouble(leitor.next());
+                                    break;
+                                }
+                                catch (Exception e) {
+                                    // propositalmente vazio
+                                    System.out.println("Quantia invalida!");
+                                }
+
+                            }
 
                             if(quantia > bilheteComprado.valorBilhete) {
 
