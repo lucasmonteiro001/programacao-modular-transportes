@@ -103,8 +103,9 @@ public class Main {
                     // Obtem a classe do voo
                     while(true) {
 
-                        System.out.println("Qual classe gostaria de viajar? Responda, ou a, ou b, ou c:");
+                        System.out.println("Qual classe gostaria de viajar? Responda, ou A, ou B, ou C:");
                         classeVoo = leitor.next();
+                        classeVoo = classeVoo.toLowerCase();
 
                         if((classeVoo.equals("a") || classeVoo.equals("b") || classeVoo.equals("c")))
                             break;
@@ -124,10 +125,14 @@ public class Main {
 
                     ABilhete bilheteComprado = maquinaAcessada.obterBilhete(origem, t);
 
-                    maquinaAcessada.gerarMsgValorBilhete(bilheteComprado);
+                    if(maquinaAcessada instanceof MaquinaAviao) {
+                        bilheteComprado = ((MaquinaAviao)maquinaAcessada).obterBilhete(origem, t, classeVoo);
+                    }
+
+                    maquinaAcessada.gerarMsgValorBilhete(bilheteComprado.valorBilhete);
 
 
-                    Double quantia = 0.0;
+                    Double quantia;
 
                     while(true) {
 
@@ -236,7 +241,7 @@ public class Main {
         Map<String, List<Horario>> lista = new HashMap<>();
         lista.put("BRA", criarHorariosBRAMaq1());
         lista.put("BHZ", criarHorariosBHZMaq1());
-        maq_1 = new MaquinaAviao(1, lista, 250.0, 15, 35, 80, "TAM");
+        maq_1 = new MaquinaAviao(1, lista, 250.0, 170.0, 100.0, 15, 35, 80, "TAM");
 
         lista = new HashMap<>();
         lista.put("BHZ", criarHorariosBHZMaq2());

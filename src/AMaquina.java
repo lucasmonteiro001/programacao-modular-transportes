@@ -67,6 +67,7 @@ public abstract  class  AMaquina implements IMaquina {
 
     @Override
     public void gerarMsgCompraRealizada() {
+
         System.out.println("\n\nSua compra foi realizada com sucesso!");
     }
 
@@ -92,8 +93,8 @@ public abstract  class  AMaquina implements IMaquina {
     }
 
     @Override
-    public void gerarMsgValorBilhete(ABilhete bilhete) {
-        System.out.println("O valor do bilhete eh: R$ " + String.format("%.2f", bilhete.valorBilhete));
+    public void gerarMsgValorBilhete(Double valorBilhete) {
+        System.out.println("O valor do bilhete eh: R$ " + String.format("%.2f", valorBilhete));
     }
 
     @Override

@@ -56,9 +56,9 @@ public interface IMaquina {
 
     /**
      * Gera uma mensagem informando o valor do bilhete
-     * @param bilhete
+     * @param valorBilhete
      */
-    public void gerarMsgValorBilhete(ABilhete bilhete);
+    public void gerarMsgValorBilhete(Double valorBilhete);
 
     /**
      * Calcula o troco do cliente, dada uma quantia recebida e o valor do bilhete

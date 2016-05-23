@@ -1,5 +1,3 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -9,12 +7,19 @@ public class MaquinaAviao extends AMaquina {
 
     private static Integer serieBilhete = 1;
 
-    public MaquinaAviao(Integer numeroDeSerie, Map<String, List<Horario>> destinoHorario, Double valorBilhete,
-                        Integer vagasClasseA, Integer vagasClasseB, Integer vagasClasseC, String companhia) {
+    private Double precoBilheteClasseA;
+    private Double precoBilheteClasseB;
+    private Double precoBilheteClasseC;
+
+    public MaquinaAviao(Integer numeroDeSerie, Map<String, List<Horario>> destinoHorario, Double precoBilheteClasseA,
+                        Double precoBilheteClasseB, Double precoBilheteClasseC, Integer vagasClasseA,
+                        Integer vagasClasseB, Integer vagasClasseC, String companhia) {
 
         this.saldo = 0.0;
         this.numeroDeSerie = numeroDeSerie;
-        this.valorDeBilheteUnico = valorBilhete;
+        this.precoBilheteClasseA = precoBilheteClasseA;
+        this.precoBilheteClasseB = precoBilheteClasseB;
+        this.precoBilheteClasseC = precoBilheteClasseC;
 
         Calendar calobj = Calendar.getInstance();
 
@@ -60,7 +65,7 @@ public class MaquinaAviao extends AMaquina {
                     Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
 
                     BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
-                            "Aeroporto", companhia, valorBilhete, h.hashCode(), "a", numPoltrona, tempo);
+                            "Aeroporto", companhia, this.precoBilheteClasseA, h.hashCode(), "a", numPoltrona, tempo);
 
 
                     this.bilhetes.get(destino).add(b);
@@ -73,7 +78,7 @@ public class MaquinaAviao extends AMaquina {
                     Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
 
                     BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
-                            "Aeroporto", companhia, valorBilhete, h.hashCode(), "b", numPoltrona, tempo);
+                            "Aeroporto", companhia, this.precoBilheteClasseB, h.hashCode(), "b", numPoltrona, tempo);
 
 
                     this.bilhetes.get(destino).add(b);
@@ -86,7 +91,7 @@ public class MaquinaAviao extends AMaquina {
                     Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
 
                     BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
-                            "Aeroporto", companhia, valorBilhete, h.hashCode(), "c", numPoltrona, tempo);
+                            "Aeroporto", companhia, this.precoBilheteClasseC, h.hashCode(), "c", numPoltrona, tempo);
 
 
                     this.bilhetes.get(destino).add(b);
@@ -127,6 +132,26 @@ public class MaquinaAviao extends AMaquina {
         return false;
     }
 
+    public ABilhete obterBilhete(String origem, Tempo tempo, String classeVoo) {
+
+        // verifica se ha algum bilhete com essa origem
+        if(bilhetes.get(origem).size() != 0) {
+
+            List<ABilhete> bilhetesDisponiveis = bilhetes.get(origem);
+
+            for(ABilhete bilhete : bilhetesDisponiveis) {
+
+                // verifica se ha algum bilhete disponivel
+                if(((BilheteAviao) bilhete).embarque.getTempo().toString().equals(tempo.toString())
+                        && ((BilheteAviao) bilhete).getClasseVoo().equals(classeVoo)) {
+                    return bilhete;
+                }
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
 
@@ -136,7 +161,9 @@ public class MaquinaAviao extends AMaquina {
                 "Maquina para vender passagens aereas na rota " + destinos[0].substring(1) + " - " +
                 destinos[1]
                         .substring(0,destinos[1].length() - 1) +
-                "\nValor: R$ " + String.format("%.2f", this.valorDeBilheteUnico) +
+                "\nValor do bilhete classe A: R$ " + String.format("%.2f", this.precoBilheteClasseA) +
+                "\nValor do bilhete classe B: R$ " + String.format("%.2f", this.precoBilheteClasseB) +
+                "\nValor do bilhete classe C: R$ " + String.format("%.2f", this.precoBilheteClasseC) +
                 "\nhorarios de partida:\n" + this.getHorariosDePartida() +
                 "Datas: diariamente" +
                 "\n";
