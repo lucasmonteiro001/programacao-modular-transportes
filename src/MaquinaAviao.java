@@ -65,7 +65,7 @@ public class MaquinaAviao extends AMaquina {
                     Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
 
                     BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
-                            "Aeroporto", companhia, this.precoBilheteClasseA, h.hashCode(), "a", numPoltrona, tempo);
+                            "Aeroporto", companhia, this.precoBilheteClasseA, h.hashCode(), "A", numPoltrona, tempo);
 
 
                     this.bilhetes.get(destino).add(b);
@@ -78,7 +78,7 @@ public class MaquinaAviao extends AMaquina {
                     Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
 
                     BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
-                            "Aeroporto", companhia, this.precoBilheteClasseB, h.hashCode(), "b", numPoltrona, tempo);
+                            "Aeroporto", companhia, this.precoBilheteClasseB, h.hashCode(), "B", numPoltrona, tempo);
 
 
                     this.bilhetes.get(destino).add(b);
@@ -91,7 +91,7 @@ public class MaquinaAviao extends AMaquina {
                     Tempo tempo = new Tempo(h.getTempo().getHora() - 2, h.getTempo().getMinutos());
 
                     BilheteAviao b = new BilheteAviao(numeroDeSerie, serieBilhete++, destino, horarioAgora, h,
-                            "Aeroporto", companhia, this.precoBilheteClasseC, h.hashCode(), "c", numPoltrona, tempo);
+                            "Aeroporto", companhia, this.precoBilheteClasseC, h.hashCode(), "C", numPoltrona, tempo);
 
 
                     this.bilhetes.get(destino).add(b);
